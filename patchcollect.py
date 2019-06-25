@@ -4,9 +4,9 @@ import subprocess
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = '/opt/patchdata/'
-#ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv'])
-ALLOWED_EXTENSIONS = set(['csv', 'process'])
+UPLOAD_FOLDER = './upload_dir/'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv'])
+#ALLOWED_EXTENSIONS = set(['csv', 'process'])
 
 UPLOAD_FOLDER = UPLOAD_FOLDER+datetime.datetime.now().strftime("%d%m%y%H")
 cmd="mkdir %s && ls -lrt %s"%(UPLOAD_FOLDER,UPLOAD_FOLDER)
