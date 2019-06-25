@@ -4,23 +4,25 @@ import subprocess
 from flask import Flask, flash, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
-UPLOAD_FOLDER = './upload_dir/'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv'])
-#ALLOWED_EXTENSIONS = set(['csv', 'process'])
-
-UPLOAD_FOLDER = UPLOAD_FOLDER+datetime.datetime.now().strftime("%d%m%y%H")
-cmd="mkdir %s && ls -lrt %s"%(UPLOAD_FOLDER,UPLOAD_FOLDER)
-output = subprocess.Popen([cmd], shell=True,  stdout = subprocess.PIPE).communicate()[0]
-
-if "total 0" in output:
-	print "Success: Created Directory %s"%(UPLOAD_FOLDER) 
-else:
-	print "Failure: Failed to Create a Directory",UPLOAD_FOLDER
-
-
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]iasdfffsd/'
+
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv'])
+
+
+
+def CreateNewDir():
+    print "I am being called"
+    global UPLOAD_FOLDER
+    print UPLOAD_FOLDER
+    UPLOAD_FOLDER = UPLOAD_FOLDER+datetime.datetime.now().strftime("%d%m%y%H")
+    cmd="mkdir -p %s && ls -lrt %s"%(UPLOAD_FOLDER,UPLOAD_FOLDER)
+    output = subprocess.Popen([cmd], shell=True,  stdout = subprocess.PIPE).communicate()[0]
+
+    if "total 0" in output:
+        print "Success: Created Directory %s"%(UPLOAD_FOLDER) 
+    else:
+        print "Failure: Failed to Create a Directory (or) Directory already Exists",UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -41,7 +43,10 @@ def upload_file():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            UPLOAD_FOLDER = './upload_dir/'
+            CreateNewDir()
+            global UPLOAD_FOLDER
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
             return redirect(url_for('uploaded_file',
                                     filename=filename))
     return '''

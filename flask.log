@@ -1,6 +1,28 @@
- * Serving Flask app "FileCollect.py"
- * Environment: DEV
- * Debug mode: off
-Usage: flask run [OPTIONS]
-
-Error: Could not import "FileCollect".
+ * Serving Flask app "FileCollect.py" (lazy loading)
+ * Environment: development
+ * Debug mode: on
+mkdir: ./upload_dir: No such file or directory
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+ * Restarting with stat
+mkdir: ./upload_dir: No such file or directory
+ * Debugger is active!
+ * Debugger PIN: 301-246-357
+ * Detected change in '/apps/flask/FlaskUploadApp/FileCollect.py', reloading
+Failure: Failed to Create a Directory ./upload_dir/25061916
+ * Restarting with stat
+ * Debugger is active!
+/apps/flask/FlaskUploadApp/FileCollect.py:48: SyntaxWarning: name 'UPLOAD_FOLDER' is assigned to before global declaration
+  global UPLOAD_FOLDER
+ * Debugger PIN: 301-246-357
+ * Detected change in '/apps/flask/FlaskUploadApp/FileCollect.py', reloading
+ * Restarting with stat
+/apps/flask/FlaskUploadApp/FileCollect.py:48: SyntaxWarning: name 'UPLOAD_FOLDER' is assigned to before global declaration
+  global UPLOAD_FOLDER
+ * Debugger is active!
+ * Debugger PIN: 301-246-357
+ * Detected change in '/apps/flask/FlaskUploadApp/FileCollect.py', reloading
+ * Restarting with stat
+/apps/flask/FlaskUploadApp/FileCollect.py:48: SyntaxWarning: name 'UPLOAD_FOLDER' is assigned to before global declaration
+  global UPLOAD_FOLDER
+ * Debugger is active!
+ * Debugger PIN: 301-246-357
